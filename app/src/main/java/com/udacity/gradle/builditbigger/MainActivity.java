@@ -1,13 +1,20 @@
 package com.udacity.gradle.builditbigger;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+
+import java.lang.ref.WeakReference;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private JokeLoaderTask loadingTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        new JokeLoaderTask(getApplicationContext()).execute();
+        if (loadingTask == null || loadingTask.getStatus() != AsyncTask.Status.RUNNING) {
+            loadingTask = new JokeLoaderTask(new WeakReference<>((ProgressBar) findViewById(R.id.progressBar)));
+            loadingTask.execute();
+        }
     }
 
 

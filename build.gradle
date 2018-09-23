@@ -2,8 +2,8 @@
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath 'com.google.guava:guava:23.0'
@@ -16,7 +16,18 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
+}
+
+task startEngineAndTest() {
+    dependsOn = [':backend:appengineStart',
+                 ':androidjokeui:connectedAndroidTest',
+                 ':androidjokeui:test',
+                 ':app:connectedAndroidTest',
+                 ':jokelibrary:test']
+
+    mustRunAfter ':backend:appengineStart'
+    finalizedBy ':backend:appengineStop'
 }
