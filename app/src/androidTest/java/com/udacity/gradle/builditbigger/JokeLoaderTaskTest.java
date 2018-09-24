@@ -18,6 +18,8 @@ public class JokeLoaderTaskTest {
     public void jokeLoadingTest() throws InterruptedException {
 
         //Using CountDownLatch for waiting while asyncTask executes
+        //Got this idea from the stackoverflow link...
+        // https://stackoverflow.com/questions/2321829/android-asynctask-testing-with-android-test-framework
         final CountDownLatch latch = new CountDownLatch(1);
         JokeLoaderTask taskToTest = new JokeLoaderTask(new WeakReference<ProgressBar>(null/*Not needed*/)) {
             @Override

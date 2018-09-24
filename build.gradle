@@ -22,12 +22,15 @@ allprojects {
 }
 
 task startEngineAndTest() {
+    description 'The gradle task that starts local server, runs all tests and stops server'
     dependsOn = [':backend:appengineStart',
                  ':androidjokeui:connectedAndroidTest',
                  ':androidjokeui:test',
                  ':app:connectedAndroidTest',
                  ':jokelibrary:test']
-
+    //To make sure google cloud engine is started before running tests
     mustRunAfter ':backend:appengineStart'
+
+    //Stop google cloud engine after running all tests
     finalizedBy ':backend:appengineStop'
 }
