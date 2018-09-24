@@ -22,5 +22,6 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("app.sanketbhat.androidjokeui.test", appContext.getPackageName());
+        System.out.println("MyTest: Tested package name");
     }
 }

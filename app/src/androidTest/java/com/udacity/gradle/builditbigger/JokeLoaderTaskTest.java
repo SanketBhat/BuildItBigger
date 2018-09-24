@@ -1,15 +1,17 @@
 package com.udacity.gradle.builditbigger;
 
 
+import android.support.test.runner.AndroidJUnit4;
 import android.widget.ProgressBar;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CountDownLatch;
 
-
+@RunWith(AndroidJUnit4.class)
 public class JokeLoaderTaskTest {
 
     @Test
@@ -21,11 +23,11 @@ public class JokeLoaderTaskTest {
             @Override
             protected void onPostExecute(String jokeString) {
                 Assert.assertNotNull(jokeString);
-                Assert.assertEquals("Hello", jokeString);
+                System.out.println("MyTest: Loaded Joke: " + jokeString);
                 latch.countDown();
             }
         };
-        latch.await();
         taskToTest.execute();
+        latch.await();
     }
 }
